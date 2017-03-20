@@ -222,40 +222,28 @@ function ukuupeople_dashboard_page() {
   <?php }
 
 function ukuu_dashboard_subscribe() {
-        wp_enqueue_script( 'ukuucrm', UKUUPEOPLE_RELPATH.'/script/ukuucrm.js' , array() );
 ?>
-  <div class="ukuu-newsletter-confirmation">
-				<h4><?php esc_html_e( 'Thanks for Subscribing!', 'UkuuPeople' ); ?> </h4>
-	</div>
+  <div id="ukuu-subscription-status"> </div>
   <form action="" method="post" id="mc-embedded-subscribe-form-ukuu" name="mc-embedded-subscribe-form-ukuu" class="validate" target="" novalidate>
 			<div class="form-table ukuu-dashboard-subscribe-form">
 					<div class = "div-subscribe-email">
-						<label for="mce-EMAIL" class="screen-reader-text"><?php esc_html_e( 'Email Address (required)', 'UkuuPeople' ); ?></label>
 						<input type="text" name="EMAIL" id="mce-EMAIL" placeholder="<?php esc_attr_e( 'Email Address (required)', 'UkuuPeople' ); ?>" class="required email" value="" required>
 					</div>
 					<div class = "div-subscribe-fname">
-						<label for="mce-FNAME" class="screen-reader-text"><?php esc_html_e( 'First Name', 'UkuuPeople' ); ?></label>
 						<input type="text" name="FNAME" id="mce-FNAME" placeholder="<?php esc_attr_e( 'First Name', 'UkuuPeople' ); ?>" class="" value="">
 					</div>
 					<div class = "div-subscribe-lname">
-						<label for="mce-LNAME" class="screen-reader-text"><?php esc_html_e( 'Last Name', 'UkuuPeople' ); ?></label>
 						<input type="text" name="LNAME" id="mce-LNAME" placeholder="<?php esc_attr_e( 'Last Name', 'UkuuPeople' ); ?>" class="" value="">
 					</div>
 					<div class = "div-subscribe-button">
 						<input type="submit" name="subscribe_btn" id="mc-embedded-subscribe" class="button" value="<?php esc_attr_e( 'Subscribe', 'UkuuPeople' ); ?>">
 					</div>
 			</div>
-      <div id ="emailErr"> <p id ="emailErrID">Invalid Email</p> </div>
-   </form>
+    </form>
 
   <?php
-      echo "<script type='text/javascript'>
-         jQuery(document).ready(function(){
-              jQuery('.ukuu-newsletter-confirmation').hide();
-            });
-            </script>";
-
-    if( !empty($_POST) ) {
+     wp_enqueue_script( 'ukuucrm', UKUUPEOPLE_RELPATH.'/script/ukuucrm.js' , array() );
+     if( !empty($_POST) ) {
       if( isset($_POST['subscribe_btn'])) {
         $to = "help@ukuupeople.com";
         $from = $_POST["EMAIL"];
@@ -268,26 +256,15 @@ function ukuu_dashboard_subscribe() {
         $email_result = wp_mail( $to, "User signup for ukuupeople", $message, "From: {$from} <{$from}>");
         if ($email_result == 1){
             echo "<script type='text/javascript'>
-             jQuery(document).ready(function(){
-                jQuery('.ukuu-newsletter-confirmation').show();
-                jQuery('#mc-embedded-subscribe-form-ukuu').hide();
-            });
+                jQuery(document).ready(function(){
+                  jQuery('#ukuu-subscription-status').html('Thanks for Subscribing!');
+                  jQuery('#ukuu-subscription-status').css('color', 'green');
+                  jQuery('#mc-embedded-subscribe-form-ukuu').hide();
+                });
             </script>";
           }
         }
     }
-}
-
-function send_email_subscribe(){
-  wp_enqueue_script( 'ukuucrm', UKUUPEOPLE_RELPATH.'/script/ukuucrm.js' , array() );
-  $to = "help@ukuupeople.com";
-  $from = $_POST["EMAIL"];
-  $message = "
-         Following are the user details
-         First Name: ".$_POST["FNAME"]."
-         Last Name: ".$_POST["LNAME"]."
-         Email: ".$_POST["EMAIL"];
-  wp_mail( $to, "User signup for UkuuPeople", $message, "From: {$from} <{$from}>");
 }
 
 function tabs() {
