@@ -1,8 +1,23 @@
 jQuery(function ($) {
-    // Contribution Dahsboard code End //
-    // Column of activity graph on Find Contact page code start //
 
-    jQuery('div.tdata').find('svg').each(function(i, el) {
+//Welcome page
+jQuery('#emailErr').hide();
+jQuery('#mc-embedded-subscribe-form-ukuu').on('submit', function () {
+  var testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+  var email = jQuery('#mce-EMAIL').val();
+  if (testEmail.test(email)) {
+     jQuery('#emailErr').hide();
+    }
+    else {
+        jQuery('#emailErr').show();
+        return false;
+    }
+});
+
+  // Contribution Dahsboard code End //
+  // Column of activity graph on Find Contact page code start //
+
+jQuery('div.tdata').find('svg').each(function(i, el) {
 	var ColumnName=jQuery(this).attr("activityc");
 	var row = JSON.parse(ColumnName);
 	var a=row['val'];
