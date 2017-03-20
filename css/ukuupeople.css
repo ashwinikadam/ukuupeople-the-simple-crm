@@ -1609,7 +1609,7 @@ margin-top: 12px;
   background: #4c91cc none repeat scroll 0 0 !important;
   color: #fff !important;
 }
-.dashboard_page_ukuu-about .ukuu-newsletter-intro {
+.dashboard_page_ukuu-about .ukuu-newsletter-intro, .dashboard_page_ukuu-get-started .ukuu-newsletter-intro, .dashboard_page_ukuu-add-ons .ukuu-newsletter-intro  {
     color: #777;
     font-size: 13px;
     font-style: italic;
